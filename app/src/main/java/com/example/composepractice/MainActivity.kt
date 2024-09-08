@@ -91,7 +91,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             .padding(24.dp)) {
             Column(modifier = Modifier
                 .weight(1f)
-                .padding(bottom = extraPadding.coerceAtMost(0.dp))) { // important: avoid negative padding which causes a crash
+                .padding(bottom = extraPadding.coerceAtLeast(0.dp))) { // important: avoid negative padding which causes a crash
                 Text(text = "Hello ")
                 Text(
                     text = name,
