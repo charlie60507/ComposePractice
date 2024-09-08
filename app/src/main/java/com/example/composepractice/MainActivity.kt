@@ -61,22 +61,26 @@ fun Greetings(modifier: Modifier = Modifier, names: List<String> = listOf("World
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    val expanded = remember { mutableStateOf(false) }
-    val extraPadding = if (expanded.value) 48.dp else 0.dp
+    var expanded by remember { mutableStateOf(false) }
+    val extraPadding = if (expanded) 48.dp else 0.dp
 
     Surface(
         color = MaterialTheme.colorScheme.primary,
         modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
-        Row(modifier = Modifier.fillMaxWidth().padding(24.dp)) {
-            Column(modifier = Modifier.weight(1f).padding(bottom = extraPadding)) {
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(24.dp)) {
+            Column(modifier = Modifier
+                .weight(1f)
+                .padding(bottom = extraPadding)) {
                 Text(text = "Hello ")
                 Text(text = name)
             }
             ElevatedButton(
-                onClick = { expanded.value = !expanded.value },
+                onClick = { expanded = !expanded },
             ) {
-                Text(if (expanded.value) "Show less" else "Show more")
+                Text(if (expanded) "Show less" else "Show more")
             }
         }
     }
